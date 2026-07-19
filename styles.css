@@ -1,0 +1,39 @@
+@import url(https://fonts.bunny.net/css?family=montserrat:300,400,400i,500);
+
+* {
+  box-sizing: border-box;
+  margin: 0%;
+  padding: 0%;
+}
+
+body {
+  background-color: RGB(238, 234, 231);
+  font-family: "Montserrat", Helvetica, sans-serif;
+}
+
+main {
+  max-width: 420px;
+  margin: 2rem auto;
+}
+
+section {
+  background-color: white;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+header {
+  background-color: #a49898;
+  color: white;
+  padding: 0.8rem;
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  background-color: #c5bcbc;
+  font-size: 0.85rem;
+  margin-top: 2rem;
+  padding: 0.5rem;
+}
