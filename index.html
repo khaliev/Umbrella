@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Umbrella 🌂</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header><h2>Umbrella - Paré à tout</h2></header>
+    <main>
+      <section class="greeting"><h3 id="greeting"></h3></section>
+      <section class="weather">
+        <form id="weather-form">
+          <input type="text" id="weather-input" placeholder="Votre ville" />
+          <button type="submit">Recherchez</button>
+        </form>
+        <div id="weather-info"></div>
+      </section>
+      <section class="todolist">
+        <form id="todo-form">
+          <input type="text" name="task" id="task" />
+          <button id="addTask">➕</button>
+        </form>
+        <ul id="todo-list"></ul>
+      </section>
+    </main>
+    <footer class="footer">2026 © Umbrella</footer>
+  </body>
+</html>
