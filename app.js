@@ -51,3 +51,5 @@ function startClock() {
   // On la met à jour toutes les minutes (60000 millisecondes)
   setInterval(updateTime, 60000);
 }
+
+const API_KEY = "";
