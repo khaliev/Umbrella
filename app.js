@@ -52,4 +52,6 @@ function startClock() {
   setInterval(updateTime, 60000);
 }
 
+// Fetch the forecast api
+
 const API_KEY = "";
