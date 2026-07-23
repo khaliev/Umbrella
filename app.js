@@ -23,6 +23,7 @@ function initApp() {
         // Étape A : L'utilisateur a accepté !
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
+        getWeatherByCoords(lat, lon);
         console.log(`Position trouvée : Lat ${lat}, Lon ${lon}`);
       },
       (error) => {
@@ -54,4 +55,13 @@ function startClock() {
 
 // Fetch the forecast api
 
-const API_KEY = "";
+const API_KEY = "1bf9affc2727c0203778c3b816be1600";
+
+function getWeatherByCoords(lat, lon) {
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=fr&APPID=${API_KEY}`;
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
+}
