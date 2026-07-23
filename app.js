@@ -55,13 +55,14 @@ function startClock() {
 
 // Fetch the forecast api
 
-const API_KEY = "1bf9affc2727c0203778c3b816be1600";
-
 function getWeatherByCoords(lat, lon) {
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=fr&APPID=${API_KEY}`;
   fetch(url)
     .then((response) => response.json())
+
     .then((data) => {
-      console.log(data);
+      const cityName = data.name;
+      const temp = Math.round(data.main.temp);
+      console.log(cityName, temp);
     });
 }
