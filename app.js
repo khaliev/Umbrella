@@ -58,11 +58,22 @@ function startClock() {
 function getWeatherByCoords(lat, lon) {
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=fr&APPID=${API_KEY}`;
   fetch(url)
-    .then((response) => response.json())
-
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Erreur HTTP ! Statut : ${response.status}`);
+      }
+      return response.json();
+    })
     .then((data) => {
       const cityName = data.name;
       const temp = Math.round(data.main.temp);
-      console.log(cityName, temp);
+      const cityElement = document.getElementById("city-name");
+      cityElement.textContent = cityName;
+
+      const tempElement = document.getElementById("temperature");
+      tempElement.textContent = temp;
+    })
+    .catch((error) => {
+      console.error("Problème avec fetch :", error.message);
     });
 }

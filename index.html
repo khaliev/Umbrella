@@ -13,14 +13,20 @@
     <header><h2>Umbrella - Paré à tout</h2></header>
     <main>
       <section class="greeting"><h3 id="greeting"></h3></section>
+
       <section class="weather">
         <div id="clock"></div>
         <form id="weather-form">
           <input type="text" id="weather-input" placeholder="Votre ville" />
           <button type="submit">Recherchez</button>
         </form>
-        <div id="weather-info"></div>
+
+        <div id="weather-info">
+          <h2 id="city-name">Chargement...</h2>
+          <p id="temperature">--°C</p>
+        </div>
       </section>
+
       <section class="todolist">
         <form id="todo-form">
           <input type="text" name="task" id="task" />
