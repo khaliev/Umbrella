@@ -46,12 +46,13 @@ function startClock() {
     // padStart(2, '0') permet d'écrire "05" au lieu de "5" pour les minutes/secondes
     const hours = String(now.getHours()).padStart(2, "0");
     const minutes = String(now.getMinutes()).padStart(2, "0");
-    clockElement.textContent = `${hours}:${minutes}`;
+    const seconds = String(now.getSeconds()).padStart(2, "0");
+    clockElement.textContent = `${hours}:${minutes}:${seconds}`;
   }
   // On l'appelle une première fois tout de suite pour éviter un blanc d'une seconde
   updateTime();
-  // On la met à jour toutes les minutes (60000 millisecondes)
-  setInterval(updateTime, 60000);
+  // On la met à jour toutes les secondes (60 millisecondes)
+  setInterval(updateTime, 60);
 }
 
 // Fetch the forecast api
