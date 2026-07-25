@@ -19,6 +19,12 @@ main {
   color: rgb(106, 80, 12);
   font-size: 1.3rem;
 }
+
+#clock {
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
 section {
   background-color: white;
   padding: 1.25rem;

@@ -15,12 +15,13 @@ function initApp() {
   // lancement de l'horloge en temps réel
 
   startClock();
+  displayDate();
 
   if (navigator.geolocation) {
     // L'outil existe ! On demande les coordonnées
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        // Étape A : L'utilisateur a accepté !
+        // Étape A : L'utilisateur a accepté de donner sa localisation!
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
         getWeatherByCoords(lat, lon);
@@ -71,9 +72,21 @@ function getWeatherByCoords(lat, lon) {
       cityElement.textContent = cityName;
 
       const tempElement = document.getElementById("temperature");
-      tempElement.textContent = temp;
+      tempElement.textContent = `${temp}°C`;
     })
     .catch((error) => {
       console.error("Problème avec fetch :", error.message);
     });
+}
+
+function displayDate() {
+  const dateElement = document.getElementById("date");
+  const now = new Date();
+  const options = {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  };
+  const formattedDate = now.toLocaleDateString("fr-FR", options);
+  dateElement.textContent = formattedDate;
 }
