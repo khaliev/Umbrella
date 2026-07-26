@@ -47,12 +47,12 @@ function startClock() {
     const hours = String(now.getHours()).padStart(2, "0");
     const minutes = String(now.getMinutes()).padStart(2, "0");
     const seconds = String(now.getSeconds()).padStart(2, "0");
-    clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+    clockElement.textContent = `${hours}:${minutes}`;
   }
   // On l'appelle une première fois tout de suite pour éviter un blanc d'une seconde
   updateTime();
   // On la met à jour toutes les secondes (60 millisecondes)
-  setInterval(updateTime, 60);
+  setInterval(updateTime, 1000);
 }
 
 // Fetch the forecast api
@@ -67,6 +67,12 @@ function getWeatherByCoords(lat, lon) {
       return response.json();
     })
     .then((data) => {
+      const description = data.weather[0].description;
+      const iconCode = data.weather[0].icon;
+      const iconElement = document.getElementById("weather-icon");
+      iconElement.src = `https://openweathermap.org/payload/api/media/file/10d@2x.png`;
+      const descElement = document.getElementById("weather-description");
+      descElement.textContent = description;
       const cityName = data.name;
       const temp = Math.round(data.main.temp);
       const cityElement = document.getElementById("city-name");
