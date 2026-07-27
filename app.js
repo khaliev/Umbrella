@@ -67,14 +67,19 @@ function getWeatherByCoords(lat, lon) {
       return response.json();
     })
     .then((data) => {
+      updateWeatherDOM(data);
       const description = data.weather[0].description;
       const iconCode = data.weather[0].icon;
       const iconElement = document.getElementById("weather-icon");
-      iconElement.src = `https://openweathermap.org/payload/api/media/file/10d@2x.png`;
       const descElement = document.getElementById("weather-description");
       descElement.textContent = description;
       const cityName = data.name;
       const temp = Math.round(data.main.temp);
+      const tempMin = Math.round(data.main.temp_min);
+      const tempMax = Math.round(data.main.temp_max);
+
+      document.getElementById("temp-min").textContent = `${tempMin}°C`;
+      document.getElementById("temp-max").textContent = `${tempMax}°C`;
       const cityElement = document.getElementById("city-name");
       cityElement.textContent = cityName;
 
@@ -97,3 +102,54 @@ function displayDate() {
   const formattedDate = now.toLocaleDateString("fr-FR", options);
   dateElement.textContent = formattedDate;
 }
+
+function updateWeatherDOM(data) {
+  const cityName = data.name;
+  const temp = Math.round(data.main.temp);
+  const tempMin = Math.round(data.main.temp_min);
+  const tempMax = Math.round(data.main.temp_max);
+  const description = data.weather[0].description;
+  const iconCode = data.weather[0].icon;
+
+  document.getElementById("city-name").textContent = cityName;
+  document.getElementById("temperature").textContent = `${temp}°C`;
+  document.getElementById("temp-min").textContent = `${tempMin}°C`;
+  document.getElementById("temp-max").textContent = `${tempMax}°C`;
+  document.getElementById("weather-description").textContent = description;
+
+  const iconElement = document.getElementById("weather-icon");
+  iconElement.src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+  iconElement.alt = description;
+}
+
+function getWeatherByCity(city) {
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=fr&APPID=${API_KEY}`;
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Ville non trouvée");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      updateWeatherDOM(data);
+    })
+    .catch((error) => {
+      console.error("Erreur de la recherche :", error.message);
+      alert("impossible de trouver cette ville. Vérifiez l'orthographe !");
+    });
+}
+
+const weatherForm = document.getElementById("weather-form");
+const weatherInput = document.getElementById("weather-input");
+
+weatherForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const city = weatherInput.value.trim();
+  if (city !== "") {
+    getWeatherByCity(city);
+    weatherInput.value = "";
+  }
+});
+
+initApp();
