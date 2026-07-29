@@ -1,3 +1,5 @@
+// GREETING SECTION
+
 document.addEventListener("DOMContentLoaded", () => {
   initApp();
 });
@@ -153,3 +155,58 @@ weatherForm.addEventListener("submit", (event) => {
 });
 
 initApp();
+
+// TO DO SECTION
+
+let todos = [];
+
+const todoForm = document.getElementById("todo-form");
+const taskInput = document.getElementById("task");
+
+todoForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  if (taskInput.value.trim() === "") return;
+  const newTodo = {
+    id: Date.now(),
+    text: taskInput.value,
+    completed: false,
+  };
+
+  todos.push(newTodo);
+
+  taskInput.value = "";
+
+  renderTodos();
+});
+
+const todoList = document.getElementById("todo-list");
+
+function renderTodos() {
+  todoList.innerHTML = "";
+  todos.forEach(function (todo) {
+    const li = document.createElement("li");
+    li.textContent = todo.text;
+    todoList.append(li);
+    if (todo.completed === true) {
+      li.classList.add("line-through");
+    } else {
+    }
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "X";
+    li.append(deleteBtn);
+    li.addEventListener("click", function () {
+      todo.completed = !todo.completed;
+      renderTodos();
+    });
+
+    deleteBtn.addEventListener("click", function (event) {
+      event.stopPropagation();
+      todos = todos.filter(function (item) {
+        return item.id !== todo.id;
+      });
+      renderTodos();
+    });
+  });
+}
