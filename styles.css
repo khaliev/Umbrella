@@ -147,6 +147,22 @@ button:active {
   flex: 1;
 }
 
+ul li {
+  list-style: none;
+  padding: 0.8rem 0.5rem; /* Correction du "0.5rem" */
+  user-select: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Style à ajouter pour barrer le texte */
+.line-through {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
 /* Card Container (Glassmorphism Effect) */
 section {
   background-color: rgba(255, 255, 255, 0.25);
