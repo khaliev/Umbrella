@@ -195,6 +195,7 @@ function renderTodos() {
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "X";
+    deleteBtn.classList.add("delete-btn");
     li.append(deleteBtn);
     li.addEventListener("click", function () {
       todo.completed = !todo.completed;

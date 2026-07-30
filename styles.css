@@ -163,6 +163,29 @@ ul li {
   opacity: 0.6;
 }
 
+.delete-btn {
+  background-color: #b85b4f;
+  color: white;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.delete-btn:hover {
+  background-color: #9e473c;
+  transform: scale(1.05);
+}
+
+.delete-btn:active {
+  transform: scale(0.95);
+}
+
 /* Card Container (Glassmorphism Effect) */
 section {
   background-color: rgba(255, 255, 255, 0.25);
