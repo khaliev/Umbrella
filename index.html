@@ -1,34 +1,82 @@
 <!doctype html>
 <html lang="fr">
   <head>
+    <!-- Character Encoding & Responsive Viewport -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Umbrella</title>
+
+    <!-- SEO & GEO (Search Engine & AI Optimization) -->
+    <title>Umbrella - Weather Dashboard & Daily Tasks</title>
+    <meta
+      name="description"
+      content="Check real-time weather forecasts and manage daily tasks seamlessly with Umbrella, your personal dashboard."
+    />
+
+    <!-- Open Graph Metadata for Social Sharing & AI Semantic Indexing -->
+    <meta property="og:title" content="Umbrella - Weather & Todo List" />
+    <meta
+      property="og:description"
+      content="A clean, fast, and personal weather & task management dashboard."
+    />
+    <meta property="og:type" content="website" />
+
+    <!-- External Resources (Favicon, CSS Stylesheet, JS Scripts) -->
+
+    <!-- PRE Charging fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.bunny.net/css?family=montserrat:300,400,400i,500,600,700"
+    />
     <link rel="icon" type="image/x-icon" href="/Umbrella/images/favicon.png" />
     <link rel="stylesheet" href="/Umbrella/styles.css" />
+
     <script src="/Umbrella/config.js"></script>
     <script src="/Umbrella/app.js" defer></script>
   </head>
-  <body>
-    <header><h2>Umbrella - Paré à tout</h2></header>
-    <main>
-      <section class="greeting"><h3 id="greeting"></h3></section>
 
-      <section class="weather">
+  <body>
+    <!-- Main Application Header -->
+    <header>
+      <h1>Umbrella - Paré à tout</h1>
+    </header>
+
+    <!-- Main Content Layout -->
+    <main>
+      <!-- Personal Greeting Widget -->
+      <section class="greeting" aria-label="Greeting">
+        <h2 id="greeting"></h2>
+      </section>
+
+      <!-- Weather & Clock Widget -->
+      <section class="weather" aria-label="Weather and Clock">
         <div id="time-container">
           <p id="clock">--:--:--</p>
           <p id="date">-- -- ----</p>
         </div>
 
+        <!-- City Search Form -->
         <form id="weather-form">
-          <input type="text" id="weather-input" placeholder="Votre ville" />
-          <button type="submit">Recherchez</button>
+          <input
+            type="search"
+            id="weather-input"
+            placeholder="Votre ville"
+            aria-label="Search for a city"
+            autocomplete="off"
+          />
+          <button type="submit">Rechercher</button>
         </form>
 
+        <!-- Weather Information Display -->
         <div id="weather-info">
-          <h2 id="city-name">Chargement...</h2>
+          <h3 id="city-name">Chargement...</h3>
           <div class="weather-detail">
-            <img id="weather-icon" src="" alt="Icône météo" />
+            <img
+              id="weather-icon"
+              src=""
+              alt="Weather Condition Icon"
+              decoding="async"
+            />
             <p id="temperature">--°C</p>
           </div>
           <p id="weather-description">--</p>
@@ -39,19 +87,28 @@
         </div>
       </section>
 
-      <section class="todolist">
+      <!-- Todo List Task Manager Widget -->
+      <section class="todolist" aria-label="Task List">
+        <h2>Mes tâches</h2>
         <form id="todo-form">
           <input
             type="text"
             name="task"
             id="task"
             placeholder="Ajoutez une tâche"
+            aria-label="New task input"
           />
-          <button id="addTask">➕</button>
+          <button id="addTask" type="submit" aria-label="Add task button">
+            ➕
+          </button>
         </form>
         <ul id="todo-list"></ul>
       </section>
     </main>
-    <footer class="footer">2026 © Umbrella - Paré à tout</footer>
+
+    <!-- Application Footer -->
+    <footer class="footer">
+      <p>2026 © Umbrella - Paré à tout</p>
+    </footer>
   </body>
 </html>
