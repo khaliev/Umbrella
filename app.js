@@ -1,3 +1,8 @@
+// CHARGING LOCAL STORAGE
+
+const storedTodos = localStorage.getItem("todos");
+let todos = storedTodos ? JSON.parse(storedTodos) : [];
+
 // GREETING SECTION
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -158,8 +163,6 @@ initApp();
 
 // TO DO SECTION
 
-let todos = [];
-
 const todoForm = document.getElementById("todo-form");
 const taskInput = document.getElementById("task");
 
@@ -182,7 +185,14 @@ todoForm.addEventListener("submit", function (event) {
 
 const todoList = document.getElementById("todo-list");
 
+// LOCAL STORAGE BACKING UP FUNCTION
+
+function saveTodos() {
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
 function renderTodos() {
+  saveTodos();
   todoList.innerHTML = "";
   todos.forEach(function (todo) {
     const li = document.createElement("li");
@@ -211,3 +221,5 @@ function renderTodos() {
     });
   });
 }
+
+renderTodos();
