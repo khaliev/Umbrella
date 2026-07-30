@@ -1,215 +1,310 @@
-/* Google Fonts Import */
-@import url(https://fonts.bunny.net/css?family=montserrat:300,400,400i,500,600,700);
+/* ==========================================================================
+   1. CUSTOM PROPERTIES
+   ========================================================================== */
 
-/* Global Reset */
-* {
+:root {
+  /* Color Palette */
+  --color-bg-start: #a38171;
+  --color-bg-end: #e8e0d5;
+  --color-text-main: #3c2f25;
+  --color-text-heading: #4a382a;
+  --color-accent-gold: rgb(106, 80, 12);
+  --color-delete: #b85b4f;
+  --color-delete-hover: #9e473c;
+
+  /* Glassmorphism UI Defaults */
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+  --glass-blur: blur(15px);
+  --glass-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1);
+
+  /* Element Defaults */
+  --input-bg: rgba(255, 255, 255, 0.4);
+  --radius-sm: 0.3rem;
+  --radius-md: 0.5rem;
+  --font-family: "Montserrat", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ==========================================================================
+   2. GLOBAL RESET & BASE STYLES
+   ========================================================================== */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* Base Body Styles */
 body {
-  background: linear-gradient(135deg, #a38171, #e8e0d5);
-  font-family: "Montserrat", Helvetica, sans-serif;
+  background: linear-gradient(
+    135deg,
+    var(--color-bg-start),
+    var(--color-bg-end)
+  );
+  font-family: var(--font-family);
+  color: var(--color-text-main);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* Layout & Container */
+/* ==========================================================================
+   3. LAYOUT & CONTAINERS
+   ========================================================================== */
+header {
+  background: transparent;
+  color: white;
+  padding: 0.8rem;
+  text-align: center;
+
+  h1 {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+}
+
 main {
   flex: 1;
-  max-width: 420px;
-  margin: 2rem auto;
+  width: 90%;
+  max-width: 26.25rem; /* Equivalent to 420px for ideal mobile widget width */
+  margin: 1.5rem auto;
 }
 
-/* Header Elements */
-#greeting {
-  color: rgb(106, 80, 12);
-  font-size: 1.3rem;
+footer {
+  color: var(--color-text-main);
+  text-align: center;
+  background: transparent;
+  font-size: 0.85rem;
+  margin-top: 1.5rem;
+  padding: 0.5rem;
 }
 
-#clock {
-  font-size: 2.5rem;
-  font-weight: 500;
+/* Glassmorphism Section Cards */
+section {
+  background-color: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1rem;
 }
 
-p {
-  color: #3c2f25;
-}
-
-/* Forms Base Layout */
+/* ==========================================================================
+   4. FORM ELEMENTS & INTERACTIVE COMPONENTS
+   ========================================================================== */
 form {
   display: flex;
   gap: 0.5rem;
   width: 100%;
 }
 
+input {
+  background-color: var(--input-bg);
+  border: var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 0.6rem 0.8rem;
+  color: var(--color-text-main);
+  font-family: inherit;
+  font-size: 0.95rem;
+
+  &::placeholder {
+    color: var(--color-text-main);
+    opacity: 0.8;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-text-heading);
+  }
+}
+
+button {
+  background-color: var(--input-bg);
+  border: var(--glass-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  color: var(--color-text-main);
+  font-weight: 500;
+  padding: 0.6rem 0.8rem;
+  font-family: inherit;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-text-heading);
+  }
+}
+
+/* ==========================================================================
+   5. WIDGET: SALUTATION & TIME
+   ========================================================================== */
+#greeting {
+  color: var(--color-accent-gold);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+#time-container {
+  text-align: center;
+  margin-bottom: 1rem;
+
+  #clock {
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: 1.1;
+  }
+
+  #date {
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+}
+
+/* ==========================================================================
+   6. WIDGET: WEATHER DISPLAY
+   ========================================================================== */
 #weather-form {
-  margin: 1.5rem 0;
+  margin: 1rem 0 1.5rem 0;
+
+  #weather-input {
+    flex: 1;
+  }
 }
 
-#weather-input {
-  flex: 1;
-}
-
-/* Weather Section Display */
 #weather-info {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+
+  #city-name {
+    font-size: 1.4rem;
+    color: var(--color-text-heading);
+  }
+
+  .weather-detail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    #weather-icon {
+      width: 5rem;
+      height: 5rem;
+      object-fit: contain;
+    }
+
+    #temperature {
+      font-weight: 600;
+      font-size: 3.5rem;
+      line-height: 1;
+    }
+  }
+
+  #weather-description {
+    margin: 0.5rem 0 0.75rem 0;
+    font-size: 1.1rem;
+    text-transform: capitalize;
+  }
 }
 
-.weather-detail {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-#temperature {
-  font-weight: 600;
-  font-size: 3.5rem;
-  line-height: 1;
-}
-
-#weather-icon {
-  width: 5rem;
-  height: 5rem;
-}
-
-#weather-description {
-  margin: 8px 0 12px 0;
-  font-size: 1.1rem;
-  text-transform: capitalize;
-}
-
-/* Weather Min/Max Row with Separator */
+/* Temperature Min/Max Divider */
 #min-max-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 1rem;
+
+  p {
+    margin: 0;
+    font-size: 0.95rem;
+
+    &:first-child::after {
+      content: "";
+      display: inline-block;
+      width: 1px;
+      height: 0.875rem;
+      background-color: rgba(60, 47, 37, 0.3);
+      margin-left: 1rem;
+      vertical-align: middle;
+    }
+  }
 }
 
-#min-max-container p {
-  margin: 0;
-  font-size: 0.95rem;
+/* ==========================================================================
+   7. WIDGET: TODO LIST
+   ========================================================================== */
+.todolist {
+  h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text-heading);
+  }
+
+  #todo-form #task {
+    flex: 1;
+  }
 }
 
-/* Vertical divider between Min and Max */
-#min-max-container p:first-child::after {
-  content: "";
-  display: inline-block;
-  width: 1px;
-  height: 14px;
-  background-color: #ccc;
-  margin-left: 16px;
-  vertical-align: middle;
+#todo-list {
+  margin-top: 1rem;
+
+  li {
+    list-style: none;
+    padding: 0.8rem 0.5rem;
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: opacity 0.2s ease;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    /* Completed Task Styling */
+    &.line-through {
+      text-decoration: line-through;
+      opacity: 0.55;
+    }
+  }
 }
 
-/* Form Inputs & Buttons */
-input {
-  background-color: rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0.5rem;
-  padding: 0.6rem 0.8rem;
-}
-
-input::placeholder {
-  color: #3c2f25;
-}
-
-button {
-  background-color: rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0.5rem;
-  cursor: pointer;
-  color: #3c2f25;
-  font-weight: 500;
-  padding: 0.6rem 0.8rem;
-}
-
-button:hover {
-  background-color: rgba(255, 255, 255, 0.6);
-  transform: translateY(-2px);
-}
-
-button:active {
-  transform: scale(0.98);
-}
-
-/* Task Input Expansion */
-#task {
-  flex: 1;
-}
-
-ul li {
-  list-style: none;
-  padding: 0.8rem 0.5rem; /* Correction du "0.5rem" */
-  user-select: none;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Style à ajouter pour barrer le texte */
-.line-through {
-  text-decoration: line-through;
-  opacity: 0.6;
-}
-
+/* Delete Task Button */
 .delete-btn {
-  background-color: #b85b4f;
+  background-color: var(--color-delete);
   color: white;
   border: none;
-  border-radius: 0.3rem;
-  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.55rem;
   font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
   transition:
     background-color 0.2s ease,
     transform 0.1s ease;
-}
 
-.delete-btn:hover {
-  background-color: #9e473c;
-  transform: scale(1.05);
-}
+  &:hover {
+    background-color: var(--color-delete-hover);
+    transform: scale(1.05);
+  }
 
-.delete-btn:active {
-  transform: scale(0.95);
-}
-
-/* Card Container (Glassmorphism Effect) */
-section {
-  background-color: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  padding: 1.25rem;
-  border-radius: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-/* Header & Footer Styles */
-header {
-  background: transparent;
-  color: white;
-  padding: 0.8rem;
-  text-align: center;
-}
-
-footer {
-  color: #3c2f25;
-  text-align: center;
-  background: transparent;
-  font-size: 0.85rem;
-  margin-top: 1.5rem;
-  padding: 0.5rem;
+  &:active {
+    transform: scale(0.95);
+  }
 }
